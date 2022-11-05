@@ -21,10 +21,9 @@ class App extends Component {
     modalImage: '',
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    const prevQuery = prevState.query;
-    const nextQuery = this.state.query;
-    if (prevQuery !== nextQuery) {
+  componentDidUpdate(_, prevState) {
+    const { query, page } = this.state;
+    if (prevState.page !== page || prevState.query !== query) {
       this.getImages();
     }
   }
@@ -42,7 +41,6 @@ class App extends Component {
           this.setState({ button: false });
         }
         this.setState(prevState => ({
-          page: prevState.page + 1,
           imagesList: [...prevState.imagesList, ...imagesList],
         }));
       })
@@ -61,6 +59,9 @@ class App extends Component {
   };
 
   onLoadMoreClick = () => {
+    this.setState(prev => ({
+      page: prev.page + 1,
+    }));
     this.getImages();
   };
 
