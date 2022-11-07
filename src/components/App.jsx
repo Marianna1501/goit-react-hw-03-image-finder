@@ -62,7 +62,6 @@ class App extends Component {
     this.setState(prev => ({
       page: prev.page + 1,
     }));
-    this.getImages();
   };
 
   toggleModal = () => {
